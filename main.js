@@ -1,24 +1,26 @@
-class Usuario {
-    constructor(email, senha) {
-        this.user = {email, senha};
-    }
+const arr = [1, 2, 3, 4, 5];
 
-    isAdmin() {
-        return this.admin === true;
-    }
-}
+arr.map(item => item + 10);
 
 
-class Admin extends Usuario {
-    constructor(email, senha) {
-        super(email, senha);
+// 3.2
+const usuario = { nome: 'Diego', idade: 23 };
 
-        this.admin = true;
-    }
-}
+const mostraIdade = (usuario) => ( usuario.idade );
 
-const User1 = new Usuario('user@teste.com', '12345');
-const Admin1 = new Admin('admin@teste.com', '654123');
+console.log(mostraIdade(usuario));
 
-console.log(User1.isAdmin());
-console.log(Admin1.isAdmin());
+// 3.3
+
+const nome = 'Diego';
+const idade = 23;
+
+const mostraUser = (nome = 'Diego', idade = 18) => ({ nome, idade });
+
+console.log(mostraUser(nome, idade));
+console.log(mostraUser(nome));
+
+
+// 3.4
+
+const promise = () => new Promise((resolve, reject) => resolve());
