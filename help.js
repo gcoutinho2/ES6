@@ -6,6 +6,9 @@
 // 2 - yarn add @babel/cli (INTERFACE DE LINHA DE COMANDO DO BABEL)
 // 3 - yarn add @babel/preset-env (VAI ENTENDER O NAVEGADOR E CONVERTER AS FEATURES DO ES 6 7 8)
 // 4 - yarn add @babel/plugin-proposal-object-rest-spread
+// 5 - yarn add webpack webpack-cli -D
+// 6 - yarn add babel-loader -D
+// 7 - yarn add webpack-dev-server -D
 
 
 ////////////////////////////////////////////////////////
@@ -192,3 +195,32 @@ const user = {
 }
 
 console.log(user);
+
+
+
+////////////////////////////////////////////////////////
+//IMPORT/EXPORT
+
+//import soma, { sub } from './funcoes';
+//import { soma as somaFunction, sub } from './funcoes';
+//import somaFunction from './soma';
+import * as funcoes from './funcoes';
+
+console.log(funcoes);
+console.log(funcoes.soma(1, 2));
+console.log(funcoes.sub(10, 6));
+
+
+//FUNCTIONS
+
+export function soma(a, b) {
+    return a + b;
+}
+
+export function sub(a, b) {
+    return a - b;
+}
+
+export function multi(a, b) {
+    return a * b;
+}
