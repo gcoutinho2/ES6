@@ -9,11 +9,12 @@
 // 5 - yarn add webpack webpack-cli -D
 // 6 - yarn add babel-loader -D
 // 7 - yarn add webpack-dev-server -D
+// 8 - yarn add @babel/plugin-transform-async-to-generator -D
+// 9 - yarn add @babel/polyfill -D
+// 10 - yarn add axios
 
 
-////////////////////////////////////////////////////////
-// Classes e Métodos
-
+//#region CLASES E MÉTODOS
 class List {
     constructor() {
         this.data = [];
@@ -53,8 +54,9 @@ class Matematica {
 
 console.log(Matematica.soma(25, 10));
 
-////////////////////////////////////////////////////////
-//OPERAÇÕES EM ARRAY
+//#endregion
+
+//#region OPERAÇÕES EM ARRAY
 const arr = [1, 3, 4, 6, 8, 9, 10];
 
 //MAP
@@ -82,9 +84,9 @@ const find = arr.find(function(){
 })
 console.log(find)
 
+//#endregion
 
-////////////////////////////////////////////////////////
-//Arrow functions
+//#region ARROW FUNCTIONS
 
 const arr = [1, 3, 5, 6];
 const newArr = arr.map(item => item * 2);
@@ -95,15 +97,17 @@ const teste = () => ({ nome: 'Couto'});
 
 console.log(teste());
 
-////////////////////////////////////////////////////////
-//Valores padrão
+//#endregion
+
+//#region VALORES PADRÃO
 
 const soma = (a = 3, b = 6) => a + b;
 console.log(soma(1));
 console.log(soma());
 
-////////////////////////////////////////////////////////
-//DESESTRUTURAÇÃO
+//#endregion
+
+//#region DESESTRUTURAÇÃO
 
 const usuario = {
     nome: 'Couto',
@@ -127,10 +131,11 @@ function mostraNome({ nome, idade }){
 
 mostraNome(usuario);
 
-////////////////////////////////////////////////////////
-//REST E SPREAD
+//#endregion
 
-//REST - PEGAR O RESTO DAS PROPRIEDADES
+//#region REST E SPREAD
+
+//#region  REST - PEGAR O RESTO DAS PROPRIEDADES
 
 const user = {
     nome: 'Couto',
@@ -156,7 +161,9 @@ function soma(...params) {
 
 console.log(soma(1, 3, 4));
 
-//SPREAD - ELE FAZ O PAPEL DE PROPAGAR, REPASSAR AS INFORMAÇÕES PARA OUTRA ESTRUTURA
+//#endregion
+
+//#region SPREAD - ELE FAZ O PAPEL DE PROPAGAR, REPASSAR AS INFORMAÇÕES PARA OUTRA ESTRUTURA
 
 const arr1 = [1, 2, 3];
 const arr2 = [4, 5, 6];
@@ -174,16 +181,20 @@ const user2 = { ...user1, nome: 'Gabriel' };
 
 console.log(user2);
 
-////////////////////////////////////////////////////////
-//TEMPLATE LITERALS
+//#endregion
+
+//#endregion
+
+//#region TEMPLATE LITERALS
 
 const nome = 'Couto';
 const idade = 21;
 
 console.log(`Meu nome é ${nome} e tenho ${idade} anos.`);
 
-////////////////////////////////////////////////////////
-//OBJECT SHORT SYNTAX
+//#endregion
+
+//#region OBJECT SHORT SYNTAX
 
 const nome = 'Couto';
 const idade = 21;
@@ -196,20 +207,21 @@ const user = {
 
 console.log(user);
 
+//#endregion
 
-
-////////////////////////////////////////////////////////
-//IMPORT/EXPORT
+//#region IMPORT/EXPORT
 
 //import soma, { sub } from './funcoes';
 //import { soma as somaFunction, sub } from './funcoes';
 //import somaFunction from './soma';
+//#endregion
+//#region AXIOS
+import axios from 'axios';
 import * as funcoes from './funcoes';
 
 console.log(funcoes);
 console.log(funcoes.soma(1, 2));
 console.log(funcoes.sub(10, 6));
-
 
 //FUNCTIONS
 
@@ -224,3 +236,61 @@ export function sub(a, b) {
 export function multi(a, b) {
     return a * b;
 }
+
+//#endregion
+
+//#region ASYNC/AWAIT
+
+const minhaPromisse = () => new Promise((resolve, reject) => {
+    setTimeout(() => { resolve('OK') }, 2000 );
+})
+
+//PARA INSTALAÇÃO DO AWAIT É NECESSÁRIO INSTALAR O SEGUINTE PLUGIN
+// yarn add @babel/plugin-transform-async-to-generator
+// yarn add @babel/polyfill
+
+// OBS:  NUNCA USA O AWAIT FORA DE UMA FUNÇÃO ASYNC
+
+// async function executaPromise() {
+//     console.log(await minhaPromisse());
+//     console.log(await minhaPromisse());
+//     console.log(await minhaPromisse());
+// }
+
+// minhaPromisse()
+//     .then(response => {
+//         console.log(response);
+//     })
+//     .catch(err => {
+
+//     });
+
+
+const executaPromise = async () => {
+    console.log(await minhaPromisse());
+    console.log(await minhaPromisse());
+    console.log(await minhaPromisse());
+}
+
+executaPromise();
+
+
+//PARA UTILIZAÇÃO DO AXIOS É NECESSÁRIO INSTALAR A DEPENDÊNCIA 
+// yarn add axios
+class Api {
+    static async getUserInfo(username) {
+        try {
+            const response = await axios.get(`https://api.github.com/users/${username}`);
+
+            console.log(response);
+        } catch (error) {
+            console.warn("Erro no API")
+        }
+    }
+}
+
+Api.getUserInfo('gcoutinho2');
+Api.getUserInfo('gcoutinho221121221');
+
+//#endregion
+
